@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package controlador;
 
-import Controlador.ConexionDB;
+import controlador.ConexionDB;
 import controlador.daos.ClienteServiciosDao;
 import java.net.URL;
 import java.sql.Connection;

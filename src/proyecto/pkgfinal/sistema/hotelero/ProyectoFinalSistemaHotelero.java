@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package proyecto.pkgfinal.sistema.hotelero;
 
 import javafx.application.Application;
@@ -12,6 +16,8 @@ import javafx.stage.Stage;
  * @author Jainer Pinta
  */
 public class ProyectoFinalSistemaHotelero extends Application{
+    String usuario ="Hotel";
+    String clave = "123456";
     /**
      * @param args the command line arguments
      */
@@ -24,8 +30,7 @@ public class ProyectoFinalSistemaHotelero extends Application{
     @Override
     public void start(Stage stage) throws Exception {
          try{
-            Parent root = FXMLLoader.load(getClass().getResource("/vista/Frm_VentanaGeneral.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("/vista/Frm_VentanaLogin.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/vista/Frm_VentanaLogin.fxml"));
             Scene escena1 = new Scene(root);
             stage.setScene(escena1);
             stage.setTitle("Sistema Hotelero");

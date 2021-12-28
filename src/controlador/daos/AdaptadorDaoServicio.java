@@ -5,7 +5,7 @@
  */
 package controlador.daos;
 
-import Controlador.ConexionDB;
+import controlador.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

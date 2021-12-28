@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package controlador;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,41 +21,49 @@ import javafx.scene.layout.BorderPane;
  * @author Jainer Pinta
  */
 public class Frm_VentanaGeneralController implements Initializable {
-    private @FXML BorderPane bpZona;
-    private @FXML Button btnMA;
-    private @FXML Button btnMR;
+
+    private @FXML
+    BorderPane bpZona;
+    private @FXML
+    Button btnMA;
+    @FXML
+    private Button btnMR;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    }    
-    
+    }
+
     @FXML
-    private void cambiarEscena(ActionEvent e){
-        if ((Button)e.getSource() == btnMA) {
-            cargarEscena("/vista/Frm_ModuloAdministrativo.fxml");   
+    private void cambiarEscena(ActionEvent e) {
+        if ((Button) e.getSource() == btnMA) {
+            cargarEscena("/vista/Frm_ModuloAdministrativo.fxml");
         }
     }
-    
+
     @FXML
-    private void cambiarms(ActionEvent e){
+    private void cambiarms(ActionEvent e) {
         //if (e.getSource() == btms) {
-            cargarEscena("/vista/Frm_ModuloServicios.fxml"); 
+        cargarEscena("/vista/Frm_ModuloServicios.fxml");
 
         //}
     }
-     @FXML
-    private void cambiarmr(ActionEvent e){
-        if (e.getSource() == btnMR) {
-            cargarEscena("/vista/Frm_ModuloRecepcion.fxml");  
 
-        }
+    @FXML
+    private void cambiarEscenaMR(ActionEvent event) {
+        cargarEscena("/vista/Frm_ModuloReserva.fxml");
     }
     
-    
-    
-    private void cargarEscena(String direccioneEscena){
+     @FXML
+    private void cambiarmr(ActionEvent e){
+            cargarEscena("/vista/Frm_ModuloRecepcion.fxml");  
+
+        
+    }
+
+    private void cargarEscena(String direccioneEscena) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(direccioneEscena));
         bpZona.getChildren().remove(bpZona.getCenter());
         try {
@@ -63,5 +71,5 @@ public class Frm_VentanaGeneralController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }    
+    }
 }

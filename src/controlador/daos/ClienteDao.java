@@ -1,37 +1,57 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controlador.daos;
 
-import modelo.Cliente;
-import javafx.scene.PerspectiveCamera;
+import lista.controlador.Lista;
 import modelo.Persona;
 
 /**
  *
- * @author jona-samy
+ * @author pablo
  */
-public class ClienteDao extends AdaptadorDaoCliente<Cliente>{
-    private Cliente cliente;
+public class ClienteDao extends AdaptadorDaoCliente<Persona> {
+
+    private Persona persona;
+    
+    
+    
     
 
     public ClienteDao() {
-        super(Cliente.class);
+        super(Persona.class);
     }
 
-    public Cliente getCliente() {
-       if(this.cliente == null)
-            this.cliente  = new Cliente();
-        return cliente;
+    public Persona getPersona() {
+        if (persona == null) {
+            persona = new Persona();
+        }
+        return persona;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public boolean guardar() {
+//        persona.setIdPersona(Long.valueOf(listar().sizeLista() + 1));
+        return guardar(persona);
     }
     
-     public boolean guardar(){
-        cliente.setIdPersona(Long.valueOf(listar().sizeLista()+1));
-        return guardar(cliente);
+    public Lista<Persona> buscarCliente(String dato, Integer tipo){
+        Lista<Persona> lista = new Lista();
+        Lista<Persona> aux = listar();
+        for (int i = 0; i < aux.sizeLista(); i++) {
+            Persona p = aux.consultarDatoPosicion(i);
+            Boolean band = (tipo == 1) ? p.getApellidos().toLowerCase().contains(dato.toLowerCase()) : 
+                    p.getNombres().toLowerCase().contains(dato.toLowerCase());
+            if (band) {
+                lista.insertarNodo(p);
+            }
+        }
+        return lista;
     }
-    
-    
     
 }

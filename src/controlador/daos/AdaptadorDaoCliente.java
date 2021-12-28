@@ -1,8 +1,11 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controlador.daos;
 
-import Controlador.ConexionDB;
-import modelo.Cliente;
+import controlador.ConexionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,96 +13,71 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import lista.controlador.Lista;
+import modelo.Empleado;
 import modelo.Persona;
 
 /**
  *
- * @author Jainer Pinta
+ * @author pablo
  */
-public class AdaptadorDaoCliente<T> implements InterfazDao<T>{
+public class AdaptadorDaoCliente<T> implements InterfazDao<T> {
+
     private Class<T> clazz;
     private ConexionDB conexionDB = new ConexionDB();
     private Lista<T> lista = new Lista<>();
-    
-    public AdaptadorDaoCliente(Class<T> clazz){
+
+    public AdaptadorDaoCliente(Class<T> clazz) {
         this.clazz = clazz;
         lista.setClazz(clazz);
     }
-    
+
     @Override
     public boolean guardar(T dato) {
-        Cliente cliente = (Cliente)dato;
+        Persona persona = (Persona) dato;
         Connection conexion = conexionDB.conectar();
         try {
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO clientes(ID,Nombres,Apellidos,Cedula,Telefono,Direccion,FechaEntrada,FechaSalida,HoraEntrada,HoraSalida,NroHabitacion) VALUE(?,?,?,?,?,?,?,?,?,?,?)");
-            ps.setLong(1, cliente.getIdPersona());
-            ps.setString(2, cliente.getNombres());
-            ps.setString(3, cliente.getApellidos());
-            ps.setString(4, cliente.getCedula());
-            ps.setString(5, cliente.getTelefono());
-            ps.setString(6, cliente.getDireccion()); 
-            ps.setString(7, cliente.getFecha_inicio().toString());
-            ps.setString(8, cliente.getFecha_final().toString());
-            ps.setString(9, cliente.getHora_entrada());
-            ps.setString(10, cliente.getHora_estimada());
-            ps.setString(11, cliente.getNrohabitacion());
-            //ps.setString(8, empleado.getIdentificacion());
-            //ps.setString(9, empleado.getCargo());
+            PreparedStatement ps = conexion.prepareStatement("INSERT INTO clientes(idCliente,Nombres,Apellidos,Cedula,Direccion,Telefono) VALUE(?,?,?,?,?,?)");
+            ps.setLong(1, persona.getIdPersona());
+            ps.setString(2, persona.getNombres());
+            ps.setString(3, persona.getApellidos());
+            ps.setString(4, persona.getCedula());
+            ps.setString(5, persona.getDireccion());
+            ps.setString(6, persona.getTelefono());
             int verificacion = ps.executeUpdate();
             ps.close();
-            if (verificacion>0) {
+            if (verificacion > 0) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        }        
+        }
     }
 
     @Override
     public boolean modificar(String dato, String ID) {
-        Connection conexion = conexionDB.conectar();
-        try {
-            PreparedStatement ps = conexion.prepareStatement("UPDATE empleados SET Cargo = '"+dato+"' WHERE IDEmpleado='"+ID+"'");
-            int verificacion = ps.executeUpdate();
-            ps.close();
-            if (verificacion>0) {
-                return true;
-            }else{
-                return false;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            return false;
-        }
+        return false;
     }
-    
-    
+
     @Override
     public Lista<T> listar() {
         Statement st = null;
         ResultSet rs = null;
         lista = new Lista<>();
         Connection conexion = conexionDB.conectar();  
-       
         try {
             st = conexion.createStatement();
             rs = st.executeQuery("SELECT * FROM clientes");
-            while (rs.next()) {       
-                Cliente cliente = new Cliente();
-                cliente.setIdPersona(rs.getLong("ID"));
+            while (rs.next()) {    
+                Persona cliente = new Persona();
+                cliente.setIdPersona(rs.getLong("IdCliente"));
                 cliente.setNombres(rs.getString("Nombres"));
                 cliente.setApellidos(rs.getString("Apellidos"));
                 cliente.setCedula(rs.getString("Cedula"));
                 cliente.setTelefono(rs.getString("Telefono"));
                 cliente.setDireccion(rs.getString("Direccion"));
-                cliente.setFecha_inicio(LocalDate.parse(rs.getString("FechaEntrada")));
-                cliente.setFecha_final(LocalDate.parse(rs.getString("FechaSalida")));
-                cliente.setHora_entrada(rs.getString("HoraEntrada"));
-                cliente.setHora_estimada(rs.getString("HoraSalida"));
-                cliente.setNrohabitacion(rs.getString("NroHabitacion"));
                 lista.insertarNodo((T) cliente);
             }            
         } catch (SQLException ex) {
@@ -107,4 +85,5 @@ public class AdaptadorDaoCliente<T> implements InterfazDao<T>{
         }
         return lista;
     }
+
 }

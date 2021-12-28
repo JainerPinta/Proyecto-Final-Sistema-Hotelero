@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package Controlador;
+package controlador;
 
 import controlador.daos.ClienteDao;
+import controlador.daos.ClienterecDao;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ import javafx.scene.layout.VBox;
 public class Frm_IngresarCheckinController implements Initializable {
 
     private ConexionDB conexionDB = new ConexionDB();
-    private ClienteDao clienteDao = new ClienteDao();
+    private ClienterecDao clienteDao = new ClienterecDao();
     private PersonaController pc = new PersonaController();
 
    private @FXML TextField txtNombres;
