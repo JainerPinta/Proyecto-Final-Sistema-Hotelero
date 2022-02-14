@@ -28,29 +28,57 @@
             </Label>
          </top>
          <left>
-            <VBox prefHeight="282.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+            <VBox prefHeight="438.0" prefWidth="202.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="btnMA" mnemonicParsing="false" onAction="#cambiarEscena" prefHeight="79.0" prefWidth="151.0" style="-fx-background-color: #476B59;" text="Modulo Administrativo" textFill="WHITE">
+                  <Button fx:id="btnMA" mnemonicParsing="false" onAction="#cambiarEscena" prefHeight="96.0" prefWidth="203.0" style="-fx-background-color: #476B59;" text="ADMINISTRACIÓN">
                      <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Button>
-                  <Button mnemonicParsing="false" onAction="#cambiarms" prefHeight="89.0" prefWidth="151.0" style="-fx-background-color: #A0A8B9;" text="Modulo de Servicios" textFill="WHITE">
+                        <Font name="Book Antiqua Bold" size="13.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="47.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/administracion%20(1).png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#cambiarms" prefHeight="108.0" prefWidth="204.0" style="-fx-background-color: #A0A8B9;" text="SERVICIOS">
                      <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
-                  <Button fx:id="btnMR" mnemonicParsing="false" onAction="#cambiarEscenaMR" prefHeight="85.0" prefWidth="151.0" style="-fx-background-color: #4AA7E0;" text="Modulo de Reserva" textFill="WHITE">
+                        <Font name="Book Antiqua Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/recepcion.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnMR" mnemonicParsing="false" onAction="#cambiarEscenaMR" prefHeight="109.0" prefWidth="204.0" style="-fx-background-color: #4AA7E0;" text="RESERVA">
                      <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font></Button>
-                  <Button fx:id="btnMRe" mnemonicParsing="false" onAction="#cambiarmr" prefHeight="85.0" prefWidth="151.0" style="-fx-background-color: #A359F7;" text="Modulo de Recepcion" textFill="WHITE">
+                        <Font name="Book Antiqua Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/reserva_1.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnMRe" mnemonicParsing="false" onAction="#cambiarmr" prefHeight="123.0" prefWidth="202.0" style="-fx-background-color: #A359F7;" text="RECEPCIÓN">
                      <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font></Button>
+                        <Font name="Book Antiqua Bold" size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="42.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../imagenes/recepcionista.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </VBox>
          </left>
          <center>
-            <ImageView fitHeight="383.0" fitWidth="481.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="281.0" fitWidth="438.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../imagenes/letrashotel.jpg" />
                </image>
