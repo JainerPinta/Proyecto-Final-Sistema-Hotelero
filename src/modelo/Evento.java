@@ -10,9 +10,10 @@ package modelo;
  * @author Usuario
  */
 public class Evento extends Servicio{
+   private String cliente;
     private String fecha;
     private String Jordana;
-    private Double duracion;
+    private String duracion;
 
     /**
      *  
@@ -50,7 +51,7 @@ public class Evento extends Servicio{
      * 
      * @return La Duracion
      */
-    public Double getDuracion() {
+    public String getDuracion() {
         return duracion;
     }
 
@@ -58,13 +59,27 @@ public class Evento extends Servicio{
      * 
      * @param duracion 
      */
-    public void setDuracion(Double duracion) {
+    public void setDuracion(String duracion) {
         this.duracion = duracion;
     }
+
+    /**
+     * 
+     * @return Cliente
+     */
+    public String getCliente() {
+        return cliente;
+    }
+
+    /**
+     * Setea un Objeto Cliente
+     * @param cliente 
+     */
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
+
     
-    
-    
-    
-    
+
     
 }
