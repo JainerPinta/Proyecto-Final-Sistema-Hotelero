@@ -26,10 +26,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lista.controlador.Lista;
 import modelo.ServiciosCliente;
@@ -79,6 +81,10 @@ public class Frm_IngresarClienteServicioController implements Initializable {
     private ComboBox<?> cbbuscar;
     @FXML
     private Button btnmodificar;
+    @FXML
+    private Label labelPrecioTotal;
+    @FXML
+    private Label ServiciosTotales;
 
     /**
      * Initializes the controller class.
@@ -344,6 +350,41 @@ public class Frm_IngresarClienteServicioController implements Initializable {
             cont = 1;
         }
         modificarr();
+    }
+
+    
+   /**
+    * Gracias a este evento cada vez que el Usuario seleccione la tabla ira cambiando de Label
+    * @param event 
+    */
+    @FXML
+    private void eventTabla(MouseEvent event) {
+        int fila = TablaSer.getSelectionModel().getSelectedIndex();
+        setearLabels(TablaSer.getItems().get(fila).getCliente());
+    }
+    
+    /**
+     * Gracias a dos sentencias de sql traera el valor total del precio de un cliente y los servicios que ha gastado y seteara los labels
+     * @param cliente 
+     */
+    private void setearLabels(String cliente){
+        String aux = "";
+        String sql = "SELECT asignarservicios.Tipo,asignarservicios.Valor FROM asignarservicios WHERE asignarservicios.Cliente = '"+cliente+"'";
+        String sql2 = "SELECT sum(asignarservicios.Valor) FROM asignarservicios WHERE asignarservicios.Cliente = '"+cliente+"'";
+        try {
+            Statement st = con.createStatement();
+            ResultSet rt = st.executeQuery(sql);
+            Statement st1 = con.createStatement();
+            ResultSet rt2 = st1.executeQuery(sql2);
+            while (rt.next()) {      
+                aux = aux+" "+rt.getString("Tipo");
+               ServiciosTotales.setText(aux);
+            }
+            while (rt2.next()) {      
+               labelPrecioTotal.setText(rt2.getString("sum(asignarservicios.Valor)"));
+            }
+        } catch (Exception e) {
+        }
     }
 
 }
