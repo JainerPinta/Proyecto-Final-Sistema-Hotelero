@@ -33,35 +33,11 @@ public class AdaptadorDaoCliente<T> implements InterfazDao<T> {
 
     @Override
     public boolean guardar(T dato) {
-        Persona persona = (Persona) dato;
-        Connection conexion = conexionDB.conectar();
-        try {
-            PreparedStatement ps = conexion.prepareStatement("INSERT INTO clientes(Nombres,Apellidos,Cedula,Direccion,Telefono) VALUE(?,?,?,?,?)");
-            //ps.setLong(1, persona.getIdPersona());
-            ps.setString(1, persona.getNombres());
-            ps.setString(2, persona.getApellidos());
-            ps.setString(3, persona.getCedula());
-            ps.setString(4, persona.getDireccion());
-            ps.setString(5, persona.getTelefono());
-            int verificacion = ps.executeUpdate();
-            ps.close();
-            if (verificacion > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-    
-     public boolean guardar1(T dato) {
         Cliente persona = (Cliente) dato;
         Connection conexion = conexionDB.conectar();
         try {
             PreparedStatement ps = conexion.prepareStatement("INSERT INTO clientes(Nombres,Apellidos,Cedula,Direccion,Telefono,Habitacion,Hora_Entrada,Fecha_Salida) VALUE(?,?,?,?,?,?,?,?)");
-            //ps.setLong(1, persona.getIdPersona());
+       
             ps.setString(1, persona.getNombres());
             ps.setString(2, persona.getApellidos());
             ps.setString(3, persona.getCedula());
@@ -83,6 +59,7 @@ public class AdaptadorDaoCliente<T> implements InterfazDao<T> {
             return false;
         }
     }
+    
 
     @Override
     public boolean modificar(T dato, int ID) {
@@ -91,29 +68,6 @@ public class AdaptadorDaoCliente<T> implements InterfazDao<T> {
 
     @Override
     public Lista<T> listar() {
-        Statement st = null;
-        ResultSet rs = null;
-        lista = new Lista<>();
-        Connection conexion = conexionDB.conectar();  
-        try {
-            st = conexion.createStatement();
-            rs = st.executeQuery("SELECT * FROM clientes");
-            while (rs.next()) {    
-                Persona cliente = new Persona();
-                cliente.setIdPersona(rs.getLong("IdCliente"));
-                cliente.setNombres(rs.getString("Nombres"));
-                cliente.setApellidos(rs.getString("Apellidos"));
-                cliente.setCedula(rs.getString("Cedula"));
-                cliente.setTelefono(rs.getString("Telefono"));
-                cliente.setDireccion(rs.getString("Direccion"));
-                lista.insertarNodo((T) cliente);
-            }            
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return lista;
-    }
-     public Lista<T> listar1() {
         Statement st = null;
         ResultSet rs = null;
         lista = new Lista<>();
@@ -139,6 +93,7 @@ public class AdaptadorDaoCliente<T> implements InterfazDao<T> {
         }
         return lista;
     }
+   
 
     @Override
     public boolean modificar(T dato) {
