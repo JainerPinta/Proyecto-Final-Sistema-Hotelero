@@ -9,29 +9,42 @@
 
 <AnchorPane id="AnchorPane" prefHeight="422.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Frm_ModuloServiciosController">
    <children>
-      <Label layoutX="261.0" layoutY="21.0" prefHeight="42.0" prefWidth="132.0" text="          SERVICIOS" textAlignment="RIGHT" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="205.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="188.0" layoutY="20.0" prefHeight="42.0" prefWidth="141.0" text="          SERVICIOS">
+         <font>
+            <Font name="Bodoni MT Bold" size="17.0" />
+         </font></Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="171.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/mejorar-el-servicio-hotelero-1020x680.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="boton" layoutX="108.0" layoutY="244.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="55.0" prefWidth="132.0" style="-fx-background-color: #000000;" text="Ingresar Servicio" textFill="WHITE">
+      <Button fx:id="boton" layoutX="88.0" layoutY="243.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="55.0" prefWidth="132.0" style="-fx-background-color: #000000;" text="INGRESAR SERVICIO" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <Button fx:id="btnServicioCliente" alignment="BASELINE_LEFT" layoutX="341.0" layoutY="240.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="62.0" prefWidth="166.0" style="-fx-background-color: #000000;" text="Servicio al Cliente" textFill="WHITE">
+      <Button fx:id="btnServicioCliente" alignment="BASELINE_LEFT" layoutX="327.0" layoutY="242.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="55.0" prefWidth="123.0" style="-fx-background-color: #000000;" text="SERVICIO AL CLIENTE" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Button>
-      <ImageView fitHeight="32.0" fitWidth="81.0" layoutX="466.0" layoutY="256.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="32.0" fitWidth="81.0" layoutX="406.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../imagenes/cliente.png" />
          </image>
       </ImageView>
-      <Button fx:id="btneventos" layoutX="231.0" layoutY="324.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="55.0" prefWidth="132.0" style="-fx-background-color: #000000;" text="Eventos" textFill="WHITE">
+      <Button fx:id="btneventos" layoutX="198.0" layoutY="331.0" mnemonicParsing="false" onAction="#seleccionarVentana" prefHeight="62.0" prefWidth="156.0" style="-fx-background-color: #000000;" text="EVENTOS" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <ImageView fitHeight="32.0" fitWidth="81.0" layoutX="314.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/copas-de-vino%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="32.0" fitWidth="81.0" layoutX="204.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagenes/copas-de-vino%20(1).png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
