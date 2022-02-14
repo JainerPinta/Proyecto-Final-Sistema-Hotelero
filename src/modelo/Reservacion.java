@@ -13,79 +13,125 @@ import java.util.Date;
  * @author pablo
  */
 public class Reservacion {
+
     private Long id_reservacion;
-    private Long id_persona;
-    private Long id_detalleFactura;
-    private Long id_habitacion;
+    private String cliente;
+    private String habitacion;
     private LocalDate fecha;
     private LocalDate fecha_entrada;
     private LocalDate fecha_salida;
     private Double costoTotal;
-
+    
+    /**
+     * Devuelve el id_reservacion
+     * @return Long
+     */
     public Long getId_reservacion() {
         return id_reservacion;
     }
 
+    /**
+     * Setea id_reservacion
+     * @param id_reservacion
+     */
     public void setId_reservacion(Long id_reservacion) {
         this.id_reservacion = id_reservacion;
     }
 
-    public Long getId_persona() {
-        return id_persona;
+    /**
+     * Devuelve el cliente
+     * @return String
+     */
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setId_persona(Long id_persona) {
-        this.id_persona = id_persona;
+    /**
+     * Setea cliente
+     * @param cliente
+     */
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public Long getId_detalleFactura() {
-        return id_detalleFactura;
+    /**
+     * Devuelve la habitacion
+     * @return String
+     */
+    public String getHabitacion() {
+        return habitacion;
     }
 
-    public void setId_detalleFactura(Long id_detalleFactura) {
-        this.id_detalleFactura = id_detalleFactura;
+    /**
+     * Setea habitacion
+     * @param habitacion
+     */
+    public void setHabitacion(String habitacion) {
+        this.habitacion = habitacion;
     }
 
-    public Long getId_habitacion() {
-        return id_habitacion;
-    }
-
-    public void setId_habitacion(Long id_habitacion) {
-        this.id_habitacion = id_habitacion;
-    }
-
+    /**
+     * Devuelve la fecha de la reserva
+     * @return LocalDate
+     */
     public LocalDate getFecha() {
         return fecha;
     }
 
+    /**
+     * Setea la fecha de la reserva
+     * @param fecha
+     */
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
+    /**
+     * Devuelve la fecha_entrada de la reserva
+     * @return LocalDate
+     */
     public LocalDate getFecha_entrada() {
         return fecha_entrada;
     }
 
+    /**
+     * Setea fecha_entrada
+     * @param fecha_entrada
+     */
     public void setFecha_entrada(LocalDate fecha_entrada) {
         this.fecha_entrada = fecha_entrada;
     }
 
+    /**
+     * Devuelve la fecha_salida de la reserva
+     * @return LocalDate
+     */
     public LocalDate getFecha_salida() {
         return fecha_salida;
     }
 
+    /**
+     * Setea la fecha_salida
+     * @param fecha_salida
+     */
     public void setFecha_salida(LocalDate fecha_salida) {
         this.fecha_salida = fecha_salida;
     }
 
+    /**
+     * Devuelve el costoTotal
+     * @return Double
+     */
     public Double getCostoTotal() {
         return costoTotal;
     }
 
+    /**
+     * Setea el costoTotal
+     * @param costoTotal
+     */
     public void setCostoTotal(Double costoTotal) {
         this.costoTotal = costoTotal;
     }
-
-    
 
 }
