@@ -37,7 +37,7 @@ public class ClienteDao extends AdaptadorDaoCliente<Cliente> {
     
     public boolean guardar() {
 //        persona.setIdPersona(Long.valueOf(listar().sizeLista() + 1));
-        return guardar1(cliente);
+        return guardar(cliente);
     }
     
     public Lista<Cliente> buscarCliente(String dato, Integer tipo){
