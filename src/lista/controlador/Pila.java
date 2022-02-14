@@ -15,37 +15,70 @@ import lista.modelo.Nodo;
 public class Pila <T> implements Serializable{
     private Nodo cabecera;
     private int size;
-
+    
+    /**
+     * Obtener tamaño de la pila
+     * @return Tamaño de la pila
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * Setear tamaño de pila
+     * @param size Tamaño de pila
+     */
     public void setSize(int size) {
         this.size = size;
     }
-
+    
+    /**
+     * Construir pila con tamaño fijo
+     * @param size Tamaño de la pila
+     */
     public Pila(int size){
         this.size= size;
     }
     
+    /**
+     * Obtener cabecera de la pila
+     * @return Dato de la cabecera
+     */
     public Nodo getCabecera() {
         if(this.cabecera == null)
             this.cabecera = new Nodo();
         return cabecera;
     }
-
+    
+    /**
+     * Setear cabecera en la pila
+     * @param cabecera Dato a setear
+     */
     public void setCabecera(Nodo cabecera) {
         this.cabecera = cabecera;
     }
     
+    /**
+     * Verifica si la pila esta vacia
+     * @return true si la pila esta vacia
+     */
     public boolean estaVacias(){
         return cabecera == null;
     }
     
+    /**
+     * Verifica si la pila esta llena
+     * @return true si la pila esta llena
+     */
     public boolean estaLlena(){
         return size == tamanio();
     }
     
+    /**
+     * Inserta un dato en la pila
+     * @param dato Dato a insertar 
+     * @return true si he insertado el dato
+     */
     public boolean push(T dato){
         if (!estaLlena()) {
             Nodo temp = new Nodo();
@@ -57,6 +90,10 @@ public class Pila <T> implements Serializable{
         return false;
     }
     
+    /**
+     * Extrae un dato de la pila
+     * @return true si el dato se ha extraido.
+     */
     public boolean pop(){
         if (!estaVacias()) {
             //Nodo temp = new Nodo();
@@ -67,6 +104,10 @@ public class Pila <T> implements Serializable{
         return false;
     }
     
+    /**
+     * Obtiene la cantidad de datos en la pila
+     * @return Cantidad de datos en la pila
+     */
     public int tamanio(){
         Nodo tmp = cabecera;
         int contador = 0;
@@ -77,6 +118,11 @@ public class Pila <T> implements Serializable{
         return contador;
     }
     
+    /**
+     * Consultar un dato en la pila por posicion
+     * @param posicion Posicion del dato
+     * @return El dato a consultar
+     */
     public T consultarDatoPosicion(int posicion){
         T dato = null;
         if (!estaVacias() && (posicion >= 0 && posicion <= tamanio()-1)) {       
@@ -92,6 +138,9 @@ public class Pila <T> implements Serializable{
         return dato;
     }
     
+    /**
+     * Imprime los datos de la pila.
+     */
     public void imprimir(){
         Nodo tmp = cabecera;
         while (!estaVacias() && tmp != null) {            

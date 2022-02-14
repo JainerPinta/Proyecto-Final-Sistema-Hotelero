@@ -19,6 +19,10 @@ public class Lista <T> implements Serializable{
     private Nodo cabecera;
     private Class clazz;
     
+    /**
+     * Verificar si una lista esta vacia
+     * @return true si esta vacia
+     */
     public boolean estaVacias(){
         return this.getCabecera() == null;
     }
@@ -30,7 +34,10 @@ public class Lista <T> implements Serializable{
         Nodo nodo = new Nodo(dato, getCabecera());
         setCabecera(nodo);
     }
-    
+    /**
+     * Insertar un dato al final de la fila
+     * @param dato El dato a insertar
+     */
     private void insertarFinal(T dato){
         insertar(dato, sizeLista());
     }
@@ -111,6 +118,9 @@ public class Lista <T> implements Serializable{
         return dato;
     }
     
+    /**
+     * Imprime los datos de la lista
+     */
     public void imprimir(){
         Nodo tmp = getCabecera();
         while (!estaVacias() && tmp != null) {            
@@ -119,6 +129,12 @@ public class Lista <T> implements Serializable{
         }
     }
     
+    /**
+     * Buscar uno o varios objetos en una lista de forma secuencial
+     * @param dato Dato a buscar
+     * @param atributo Atributo del objeto a buscar
+     * @return Lista de datos encontrados
+     */
     public Lista<T> busquedaSecuencial(String dato, String atributo){
         Lista<T> listaResultados = new Lista();
         try{
@@ -142,6 +158,12 @@ public class Lista <T> implements Serializable{
         return listaResultados;
     }
     
+    /**
+     * Buscar un objeto en una lista por busqueda binaria
+     * @param dato Dato a buscar
+     * @param atributo Atributo del objeto a buscar
+     * @return El dato encontrado.
+     */
     public T busquedaBinaria(String dato, String atributo){
         try{
             int posCentral, posInicial, posFinal;
@@ -178,6 +200,10 @@ public class Lista <T> implements Serializable{
         return null;   
     }
     
+    /**
+     * Borra un objeto de una lista
+     * @param posicion Posiciona borrar
+     */
     public void borrar(int posicion){
         if (!estaVacias() && (posicion >= 0 && posicion <= sizeLista()-1)) {
             if (posicion == 0) {
