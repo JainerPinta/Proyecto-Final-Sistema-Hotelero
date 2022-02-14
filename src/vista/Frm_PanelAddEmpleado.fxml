@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="314.0" prefWidth="302.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Frm_PanelAddEmpleadoController">
+<AnchorPane id="AnchorPane" prefHeight="314.0" prefWidth="302.0" style="-fx-background-color: #f2ed91;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Frm_PanelAddEmpleadoController">
    <children>
       <Pane prefHeight="392.0" prefWidth="307.0">
          <children>
-            <Button fx:id="btnAdd" layoutX="43.0" layoutY="347.0" mnemonicParsing="false" onAction="#addEmpleado" text="Añadir" />
+            <Button id="but" fx:id="btnAdd" layoutX="22.0" layoutY="347.0" mnemonicParsing="false" onAction="#addEmpleado" prefHeight="31.0" prefWidth="68.0" stylesheets="@css/stylesheet.css" text="Añadir" />
             <HBox layoutX="12.0" layoutY="58.0" prefHeight="188.0" prefWidth="268.0">
                <children>
                   <VBox prefHeight="178.0" prefWidth="105.0" spacing="15.0">
@@ -30,12 +30,12 @@
                   </VBox>
                   <VBox fx:id="vboxDatos" prefHeight="266.0" prefWidth="143.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="txtNombres" />
-                        <TextField fx:id="txtApellidos" />
+                        <TextField id=":" fx:id="txtNombres" stylesheets="@css/TextField.css" />
+                        <TextField fx:id="txtApellidos" stylesheets="@css/TextField.css" />
                         <DatePicker fx:id="txtFecha" />
-                        <TextField fx:id="txtTelefono" />
-                        <TextField fx:id="txtDireccion" />
-                        <TextField fx:id="txtCedula" />
+                        <TextField id="lion" fx:id="txtTelefono" stylesheets="@css/TextField.css" />
+                        <TextField id="text-field" fx:id="txtDireccion" stylesheets="@css/TextField.css" />
+                        <TextField fx:id="txtCedula" stylesheets="@css/TextField.css" />
                      </children>
                   </VBox>
                </children>
@@ -53,17 +53,17 @@
                         <Label text="Contraseña" />
                      </children>
                   </VBox>
-                  <VBox fx:id="vboxEmpleado" prefHeight="61.0" prefWidth="137.0" spacing="5.0">
+                  <VBox fx:id="vboxEmpleado" prefHeight="85.0" prefWidth="143.0" spacing="5.0">
                      <children>
-                        <TextField fx:id="txtID" prefHeight="25.0" prefWidth="144.0" />
-                        <ComboBox fx:id="cbxCargo" prefHeight="20.0" prefWidth="169.0" />
-                        <TextField fx:id="txtClave" />
+                        <TextField fx:id="txtID" prefHeight="25.0" prefWidth="144.0" stylesheets="@css/TextField.css" />
+                        <ComboBox id="glass" fx:id="cbxCargo" prefHeight="20.0" prefWidth="169.0" stylesheets="@css/stylesheet.css" />
+                        <TextField fx:id="txtClave" stylesheets="@css/TextField.css" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <Button fx:id="btnActualizar" layoutX="112.0" layoutY="347.0" mnemonicParsing="false" onAction="#modificarEmpleado" text="Actualizar" />
-            <Button fx:id="btnLimpiar" layoutX="210.0" layoutY="347.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar" />
+            <Button id="but" fx:id="btnActualizar" layoutX="98.0" layoutY="347.0" mnemonicParsing="false" onAction="#modificarEmpleado" prefHeight="31.0" prefWidth="96.0" stylesheets="@css/stylesheet.css" text="Actualizar" />
+            <Button id="but" fx:id="btnLimpiar" layoutX="200.0" layoutY="347.0" mnemonicParsing="false" onAction="#limpiarCampos" prefHeight="31.0" prefWidth="80.0" stylesheets="@css/stylesheet.css" text="Limpiar" />
          </children>
       </Pane>
    </children>
