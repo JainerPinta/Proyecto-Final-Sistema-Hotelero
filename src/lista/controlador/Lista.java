@@ -224,7 +224,12 @@ public class Lista <T> implements Serializable{
         }
     }
     
-    
+    /**
+     * Modifica un dato por posicion
+     * @param dato Nuevo dato
+     * @param pos  Posicion a modificar
+     * @return true si se ha modificado el dato
+     */
     public boolean modificarPorPos(T dato, int pos){
         if (!estaVacias() && (pos<=sizeLista()-1) && pos>=0) {
             Nodo iterador = getCabecera();
@@ -242,6 +247,11 @@ public class Lista <T> implements Serializable{
         return false;
     }
     
+    /**
+     * Obtener campo de de un objeto
+     * @param nombre Nombre del atributo
+     * @return Campo del objeto
+     */
     private Field getField(String nombre) {
         for (Field field : clazz.getDeclaredFields()) {
             if (field.getName().equalsIgnoreCase(nombre)) {
@@ -252,18 +262,25 @@ public class Lista <T> implements Serializable{
         return null;
     }
     
-//    public void testReflect(T dato, String atributo){
-//        try{
-//            System.out.println(getField(atributo).get(dato).toString());                      
-//        }catch(Exception e){
-//            System.out.println("error" +e);
-//        }
-//    }
-    
+    /**
+     * Obtiene el dato de un campo del objeto
+     * @param dato Dato  obtener
+     * @param atributo Atributo del objeto
+     * @return El dato del objeto
+     * @throws Exception Expecion al obtener el dato.
+     */
     public Object value(T dato, String atributo) throws Exception {
         return getField(atributo).get(dato);
     }
     
+    /**
+     * Ordena una lista por metodo quicksort
+     * @param izq Primera posicion de la lista
+     * @param der Ultima posicion de la lista
+     * @param atributo Atributo del objeto por el cual se va a ordenar
+     * @param ordenacion Modo de orden, ascendente o descendente
+     * @return La lista ordenada
+     */
     public Lista<T> quicksort(int izq, int der, String atributo, Integer ordenacion){
         try{
             int i, ult, m;
@@ -306,6 +323,12 @@ public class Lista <T> implements Serializable{
         return this;
     }
     
+    /**
+     * Ordena una lista por metodo shell
+     * @param atributo Atributo del objeto por el cual se va a ordenar
+     * @param ordenacion Modo de orden, ascendente o descendente
+     * @return La lista ordenada
+     */
     public Lista<T> shell (String atributo, Integer ordenacion){
         try{
             int intervalo, i, j, k;
@@ -347,6 +370,12 @@ public class Lista <T> implements Serializable{
         return this;
     }
     
+    /**
+     * Ordena una lista de objetos por metodo de seleccion.
+     * @param atributo Atributo del objeto por el cual se va a ordenar
+     * @param ordenacion Modo de orden, ascendente o descendente
+     * @return La lista ordenada
+     */
     public Lista<T> seleccion_clase(String atributo, Integer ordenacion){
         //Lista<T> a = this;
         try{
@@ -385,18 +414,34 @@ public class Lista <T> implements Serializable{
         return this;
     }
     
+    /**
+     * Obteniene el nodo cabecera de la lsita
+     * @return Nodo cabecera de la lista
+     */
     public Nodo getCabecera() {
         return cabecera;
     }
 
+    /**
+     * Setear el nodo cabecera de la lista
+     * @param cabecera Nodo a insertar
+     */
     public void setCabecera(Nodo cabecera) {
         this.cabecera = cabecera;
     }
-
+    
+    /**
+     * Obtener el dato clazz de la lista
+     * @return clazz de la lista
+     */
     public Class getClazz() {
         return clazz;
     }
 
+    /**
+     * Setar clazz a la lista
+     * @param clazz Dato clazz
+     */
     public void setClazz(Class clazz) {
         this.clazz = clazz;
     }

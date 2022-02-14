@@ -99,6 +99,7 @@ public class Frm_IngresarClienteController implements Initializable {
         }
         ingresarElementosTabla(listaFX);
     }
+    
     /**
      * Se ingresa los datos a la tabla
      * @param Listafx 
