@@ -37,7 +37,7 @@ public class Frm_ModuloReservaController implements Initializable {
 
     @FXML
     private void seleccionarVentana(ActionEvent event) {
-        cargarVentana("/vista/Frm_IngresarReserva.fxml");
+        cargarVentana("/vista/Frm_IR.fxml");
     }
 
     private void cargarVentana(String direccion) {

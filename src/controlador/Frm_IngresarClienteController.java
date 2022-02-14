@@ -44,8 +44,10 @@ public class Frm_IngresarClienteController implements Initializable {
     
     private Stage stage;
     public String test;
-    ClienteDao clienteDao = new ClienteDao();
+    public ClienteDao clienteDao = new ClienteDao();
     private PersonaController pc = new PersonaController();
+    int select = -1;
+    
     
     private @FXML TextField txtseleccionar;
     private @FXML TextField txtNombres;
@@ -73,7 +75,6 @@ public class Frm_IngresarClienteController implements Initializable {
      @FXML Button btnseleccionar;
     private @FXML ComboBox<?> cbxcriterio;
      @FXML Button btnseleccionar2;
-    int select;
     
     /**
      * Initializes the controller class.
@@ -91,7 +92,7 @@ public class Frm_IngresarClienteController implements Initializable {
      */
     private void cargarTabla(){
         Lista<Cliente> lista = new Lista<>();
-        lista =clienteDao.listar1();
+        lista =clienteDao.listar();
         ObservableList<Cliente> listaFX = FXCollections.observableArrayList();
         for (int i = 0; i < lista.sizeLista(); i++) {
             listaFX.add((Cliente)lista.consultarDatoPosicion(i));
@@ -132,7 +133,7 @@ public class Frm_IngresarClienteController implements Initializable {
             stage.setScene(scene); 
             //contro.btnseleccionar.setVisible(true); 
             stage.showAndWait(); 
-            this.txtseleccionar.setText(contro.test); 
+//            this.txtseleccionar.setText(contro.test); 
         } catch (Exception e) { 
             e.printStackTrace(); 
         } 
@@ -147,9 +148,9 @@ public class Frm_IngresarClienteController implements Initializable {
     @FXML 
     public void seleccionarCliente(ActionEvent event) { 
         try { 
-            int fila = tblClientes.getSelectionModel().getSelectedIndex(); 
-            if (fila >= 0) { 
-                test = tblClientes.getItems().get(fila).getNombres(); 
+            select = tblClientes.getSelectionModel().getSelectedIndex(); 
+            if (select >= 0) { 
+                test = tblClientes.getItems().get(select).getNombres(); 
                 Node source = (Node) event.getSource(); 
                 Stage stage = (Stage) source.getScene().getWindow(); 
                 stage.close(); 
@@ -248,7 +249,7 @@ public class Frm_IngresarClienteController implements Initializable {
         Lista<Cliente> aux = new Lista();
         switch (select) {
             case 0:
-                aux = clienteDao.listar1();
+                aux = clienteDao.listar();
                 break;
             case 1:
                 aux = clienteDao.buscarCliente(txtBuscar.getText(), 1);

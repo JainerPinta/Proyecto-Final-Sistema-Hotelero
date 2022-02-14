@@ -17,19 +17,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lista.controlador.Lista;
-import modelo.Persona;
 import modelo.Reservacion;
 
 /**
@@ -39,43 +41,45 @@ import modelo.Reservacion;
  */
 public class Frm_IRController implements Initializable {
 
-    public ReservaDao rd = new ReservaDao();
-    private Stage stage;
+    private ReservaDao rd = new ReservaDao();
     private Frm_IngresarClienteController iccontroller;
    
     private @FXML TextField txtCliente;
-    @FXML
-    private TextField txtHabitacion;
+    private @FXML TextField txtHabitacion;
     private @FXML TextField txtCosto;
-    private @FXML TableView<Reservacion> tblTabla;
+    
     private @FXML TableColumn<?, ?> colCliente;
     private @FXML TableColumn<?, ?> colHabitacion;
     private @FXML TableColumn<?, ?> colFechaReserva;
     private @FXML TableColumn<?, ?> colCosto;
+    private @FXML TableColumn<?, ?> colFechaEntrada;
+    private @FXML TableColumn<?, ?> colFechaSalida;
+    private @FXML TableView<Reservacion> tblReservas;
+    private @FXML TableColumn<?, ?> colIdReserva;
+    
     private @FXML Button btnClente;
     private @FXML Button btnHabitacion;
+    private @FXML Button btnguardar;
+    private @FXML Button btnEliminar;
+    private @FXML Button btnModificar;
+    private @FXML Button btnRegresar;
+    
     private @FXML DatePicker jdFechaReserva;
     private @FXML DatePicker jdfechaEntrada;
     private @FXML DatePicker jdFechaSalida;
-    private @FXML TableColumn<?, ?> colFechaEntrada;
-    private @FXML TableColumn<?, ?> colFechaSalida;
-    private @FXML ComboBox<?> cbxservicios;
-    private @FXML Button btnReserva;
-    String test;
+    private ComboBox<?> cbxservicios;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        cargarTabla();
-        ObservableList listacbx = FXCollections.observableArrayList("Gimnasio", "Piscina" );
-        cbxservicios.setItems(listacbx);
+        cargarTabla();
+        limpiarDatos();
     }
     
-        private void cargarTabla() {
-        Lista<Reservacion> lista = new Lista<>();
-        lista = rd.listar();
+    private void cargarTabla() {
+        Lista<Reservacion> lista = rd.listar();
         ObservableList<Reservacion> listaFX = FXCollections.observableArrayList();
         for (int i = 0; i < lista.sizeLista(); i++) {
             listaFX.add(lista.consultarDatoPosicion(i));
@@ -84,27 +88,29 @@ public class Frm_IRController implements Initializable {
     }
 
     private void ingresarElementosTabla(ObservableList<Reservacion> listaFX) {
-        colCliente.setCellValueFactory(new PropertyValueFactory("id_persona"));
-        colHabitacion.setCellValueFactory(new PropertyValueFactory("id_habitacion"));
+        colIdReserva.setCellValueFactory(new PropertyValueFactory("id_reservacion"));
+        colCliente.setCellValueFactory(new PropertyValueFactory("cliente"));
+        colHabitacion.setCellValueFactory(new PropertyValueFactory("habitacion"));
         colFechaReserva.setCellValueFactory(new PropertyValueFactory("fecha"));
         colFechaEntrada.setCellValueFactory(new PropertyValueFactory("fecha_entrada"));
         colFechaSalida.setCellValueFactory(new PropertyValueFactory("fecha_salida"));
         colCosto.setCellValueFactory(new PropertyValueFactory("costoTotal"));
-        tblTabla.setItems(listaFX);
+        tblReservas.setItems(listaFX);
     }
 
     @FXML
     private void guardarReserva(ActionEvent event) {
         if (verificarCampos()) {
-            rd.getReserva().setId_habitacion(new Long(txtHabitacion.getText()));
-            rd.getReserva().setId_persona(iccontroller.clienteDao.listar().consultarDatoPosicion(iccontroller.select).getIdPersona());
+            rd.getReserva().setHabitacion(txtHabitacion.getText());
+            rd.getReserva().setCliente(iccontroller.clienteDao.listar().consultarDatoPosicion(iccontroller.select).getNombres() + " " +iccontroller.clienteDao.listar().consultarDatoPosicion(iccontroller.select).getApellidos());
             rd.getReserva().setFecha(jdFechaReserva.getValue());
             rd.getReserva().setFecha_entrada(jdfechaEntrada.getValue());
             rd.getReserva().setFecha_salida(jdFechaSalida.getValue());
             rd.getReserva().setCostoTotal(Double.parseDouble(txtCosto.getText()));
             if (rd.guardar()) {
                 crearAlerta(Alert.AlertType.INFORMATION, "OK", "Datos guardados", "Los datos se han almacenado correctamente");
-                limpiar();
+                limpiarDatos();
+                cargarTabla();
             } else {
                 crearAlerta(Alert.AlertType.ERROR, "Error", "Datos no guardados", "Ha surgido un error al guardar los datos");
             }
@@ -123,26 +129,42 @@ public class Frm_IRController implements Initializable {
         return true;
     }
     
-      private void limpiar() {
+      private void limpiarDatos() {
+          rd.setReserva(null);
           txtCliente.setText("");
           txtCosto.setText("");
           txtHabitacion.setText("");
+          btnguardar.setDisable(false);
+          btnEliminar.setDisable(true);
+          btnModificar.setDisable(true);
     }
 
     @FXML
     private void seleccionarCliente(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/Frm_IngresarCliente.fxml"));
-            loader.setLocation(getClass().getResource("/vista/Frm_IngresarCliente.fxml"));
             Parent root = loader.load();
             Frm_IngresarClienteController contro = loader.getController();
             this.iccontroller = contro;
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            contro.btnseleccionar2.setVisible(true);
+            contro.btnseleccionar.setVisible(true);
             stage.showAndWait();
             this.txtCliente.setText(contro.clienteDao.listar().consultarDatoPosicion(contro.select).getApellidos() + " " + contro.clienteDao.listar().consultarDatoPosicion(contro.select).getNombres());
+        } catch (IOException ex) {
+            Logger.getLogger(Frm_IRController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void cargarVentana(String direccion) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(direccion));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
         } catch (IOException ex) {
             Logger.getLogger(Frm_IRController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -161,5 +183,83 @@ public class Frm_IRController implements Initializable {
         alerta.showAndWait();
     }
 
+    @FXML
+    private void eliminar(ActionEvent event) {
+        if (tblReservas.getSelectionModel().getSelectedIndex() != -1) {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+            alerta.setTitle("Elminar");
+            alerta.setHeaderText("Esta seguro de eliminar la reserva");
+            alerta.setContentText("Los datos de la reserva se borraran despues de confirmar");
+            if (alerta.showAndWait().get() == ButtonType.OK) {
+                Reservacion reserva = (Reservacion) tblReservas.getSelectionModel().getSelectedItem();
+                if (rd.eliminar(reserva.getId_reservacion().intValue())) {
+                    crearAlerta(Alert.AlertType.INFORMATION, "Informacion", "Reserva eliminada", "La reserva se ha eliminado correctamente");
+                    limpiarDatos();
+                    cargarTabla();
+                } else {
+                    crearAlerta(Alert.AlertType.ERROR, "Error", "Reserva no eliminada", "El empleado no se ha podido eliminar");
+                }
+            }
+        }
+    }
+
+    @FXML
+    private void modificar(ActionEvent event) {
+        if (verificarCampos()) {
+                rd.getReserva().setCliente(txtCliente.getText());
+                rd.getReserva().setHabitacion(txtHabitacion.getText());
+                rd.getReserva().setFecha(jdFechaReserva.getValue());
+                rd.getReserva().setFecha_entrada(jdfechaEntrada.getValue());
+                rd.getReserva().setFecha_salida(jdFechaSalida.getValue());
+                rd.getReserva().setCostoTotal(Double.parseDouble(txtCosto.getText()));
+                System.out.println(rd.getReserva().getId_reservacion());
+                if (rd.modificar()) {
+                    crearAlerta(Alert.AlertType.INFORMATION, "OK", "Datos actualizados", "Los datos se han actualizado correctamente");
+                    limpiarDatos();
+                    cargarTabla();
+                }else{
+                    crearAlerta(Alert.AlertType.ERROR, "Error", "Datos no actualizados", "Ha surgido un error al actualizar los datos");
+                }
+
+        }else{
+            crearAlerta(Alert.AlertType.INFORMATION, "Error", "Campos vacios", "Rellene todos los campos para actualizar al empleado");
+        }
+    }
     
+
+    @FXML
+    private void generarPDF(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void Regresar(ActionEvent event) {
+        Node node = (Node) event.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void seleccionarReserva(MouseEvent event) {
+        cargrReserva();
+    }
+
+    private void cargrReserva() {
+        Reservacion r = tblReservas.getSelectionModel().getSelectedItem();
+        rd.getReserva().setId_reservacion(r.getId_reservacion());
+        txtCliente.setText(r.getCliente());
+        txtHabitacion.setText(r.getHabitacion());
+        jdFechaReserva.setValue(r.getFecha());
+        jdfechaEntrada.setValue(r.getFecha_entrada());
+        jdFechaSalida.setValue(r.getFecha_salida());
+        txtCosto.setText(String.valueOf(r.getCostoTotal()));
+        btnEliminar.setDisable(false);
+        btnModificar.setDisable(false);
+        btnguardar.setDisable(true);
+    }
+
+    @FXML
+    private void cancelar(ActionEvent event) {
+        limpiarDatos();
+    }
 }
