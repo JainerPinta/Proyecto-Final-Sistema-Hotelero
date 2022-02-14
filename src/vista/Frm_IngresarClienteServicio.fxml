@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="494.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.Frm_IngresarClienteServicioController">
    <children>
-      <Label layoutY="-2.0" prefHeight="512.0" prefWidth="723.0" style="-fx-background-color: #D2BC97;" />
+      <Label layoutY="-2.0" prefHeight="554.0" prefWidth="762.0" style="-fx-background-color: #D2BC97;" />
       <Label layoutX="268.0" layoutY="14.0" prefHeight="31.0" prefWidth="88.0" text="Asignar" textAlignment="CENTER">
          <font>
             <Font name="Book Antiqua Bold" size="21.0" />
@@ -46,13 +46,13 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <TableView fx:id="TablaSer" layoutX="99.0" layoutY="269.0" prefHeight="226.0" prefWidth="514.0">
+      <TableView fx:id="TablaSer" layoutX="41.0" layoutY="269.0" onMousePressed="#eventTabla" prefHeight="264.0" prefWidth="514.0">
         <columns>
           <TableColumn fx:id="coId" prefWidth="39.199974060058594" text="Id" />
           <TableColumn fx:id="coCliente" prefWidth="111.20001220703125" text="Cliente" />
-            <TableColumn fx:id="coServicio" prefWidth="111.20001220703125" text="Servicio" />
-            <TableColumn fx:id="coUso" prefWidth="111.20001220703125" text="Uso" />
-            <TableColumn fx:id="coPrecio" prefWidth="138.4000305175781" text="Precio Total" />
+            <TableColumn fx:id="coServicio" prefWidth="154.4000244140625" text="Servicio" />
+            <TableColumn fx:id="coUso" prefWidth="90.39996337890625" text="Uso" />
+            <TableColumn fx:id="coPrecio" prefWidth="118.39993286132812" text="Precio Total" />
         </columns>
       </TableView>
       <ComboBox fx:id="cbUso" layoutX="468.0" layoutY="58.0" prefWidth="150.0" />
@@ -77,5 +77,23 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+      <Label layoutX="604.0" layoutY="261.0" prefHeight="50.0" prefWidth="98.0" text="PRECIO TOTAL">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPrecioTotal" layoutX="609.0" layoutY="301.0" prefHeight="50.0" prefWidth="88.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="615.0" layoutY="361.0" prefHeight="38.0" prefWidth="78.0" text="SERVICIOS UTILIZADOS" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="ServiciosTotales" layoutX="588.0" layoutY="410.0" prefHeight="68.0" prefWidth="130.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
